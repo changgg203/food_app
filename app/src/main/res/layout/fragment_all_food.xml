@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".ui.food.AllFoodFragment">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_back_arrow"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_marginStart="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ẩm Thực Việt Nam"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <!-- TAB LAYOUT -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:tabTextColor="#999999"
+        app:tabSelectedTextColor="#FF7A00"
+        app:tabIndicatorColor="#FF7A00"
+        app:tabMode="scrollable">
+
+        <!-- Tab mẫu (có thể xoá nếu dùng dynamic) -->
+        <com.google.android.material.tabs.TabItem android:text="All" />
+        <com.google.android.material.tabs.TabItem android:text="Breakfast" />
+        <com.google.android.material.tabs.TabItem android:text="Lunch" />
+        <com.google.android.material.tabs.TabItem android:text="Dinner" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <!-- LIST SẢN PHẨM -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProducts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        tools:listitem="@layout/item_product" />
+
+</LinearLayout>
