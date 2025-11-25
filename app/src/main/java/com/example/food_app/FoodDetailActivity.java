@@ -2,7 +2,7 @@ package com.example.food_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class FoodDetailActivity extends AppCompatActivity {
 
-    private ImageView btnBack, btnFavorite, imgProduct;
-    private TextView tvProductName, tvRestaurantName, tvDescription, tvCookingMethod;
-    private TextView tvQuantity, btnMinus, btnPlus;
-    private Button btnAddToCart;
+    private ImageButton btnBack, btnFavorite, btnFavoriteFilled;
+    private ImageView imgFoodCover;
+    private TextView tvFoodName, tvIngredients, tvDescription, tvHowToCook;
     private int quantity = 1;
+    private boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,48 +28,35 @@ public class FoodDetailActivity extends AppCompatActivity {
         }
 
         // Initialize views
-        btnBack = findViewById(R.id.btnBack);
-        btnFavorite = findViewById(R.id.btnFavorite);
-        imgProduct = findViewById(R.id.imgProduct);
-        tvProductName = findViewById(R.id.tvProductName);
-        tvRestaurantName = findViewById(R.id.tvRestaurantName);
+        btnBack = findViewById(R.id.btn_back);
+        btnFavorite = findViewById(R.id.btn_favorite);
+        btnFavoriteFilled = findViewById(R.id.btn_favorite_filled);
+        imgFoodCover = findViewById(R.id.imgFoodCover);
+        tvFoodName = findViewById(R.id.tvFoodName);
+        tvIngredients = findViewById(R.id.tvIngredients);
         tvDescription = findViewById(R.id.tvDescription);
-        tvCookingMethod = findViewById(R.id.tvCookingMethod);
-        tvQuantity = findViewById(R.id.tvQuantity);
-        btnMinus = findViewById(R.id.btnMinus);
-        btnPlus = findViewById(R.id.btnPlus);
-        btnAddToCart = findViewById(R.id.btnAddToCart);
+        tvHowToCook = findViewById(R.id.tvHowToCook);
 
         // Back button
         btnBack.setOnClickListener(v -> onBackPressed());
 
-        // Favorite button
+        // Favorite button - toggle between empty and filled
         btnFavorite.setOnClickListener(v -> {
+            isFavorite = true;
+            btnFavorite.setVisibility(ImageView.GONE);
+            btnFavoriteFilled.setVisibility(ImageView.VISIBLE);
             Toast.makeText(this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
-            btnFavorite.setImageTintList(getColorStateList(R.color.white));
         });
 
-        // Minus button
-        btnMinus.setOnClickListener(v -> {
-            if (quantity > 1) {
-                quantity--;
-                tvQuantity.setText(String.valueOf(quantity));
-            }
+        // Favorite filled button - toggle back to empty
+        btnFavoriteFilled.setOnClickListener(v -> {
+            isFavorite = false;
+            btnFavoriteFilled.setVisibility(ImageView.GONE);
+            btnFavorite.setVisibility(ImageView.VISIBLE);
+            Toast.makeText(this, "Đã xóa khỏi yêu thích", Toast.LENGTH_SHORT).show();
         });
 
-        // Plus button
-        btnPlus.setOnClickListener(v -> {
-            quantity++;
-            tvQuantity.setText(String.valueOf(quantity));
-        });
-
-        // Add to cart button
-        btnAddToCart.setOnClickListener(v -> {
-            Toast.makeText(this, "Đã thêm " + quantity + " sản phẩm vào giỏ", Toast.LENGTH_SHORT).show();
-            // TODO: Add to cart logic
-        });
-
-        // Load product details (from intent or API)
+        // Load product details
         loadProductDetails();
     }
 
@@ -84,20 +71,20 @@ public class FoodDetailActivity extends AppCompatActivity {
             int foodImageId = intent.getIntExtra("foodImageId", 0);
 
             if (foodName != null) {
-                tvProductName.setText(foodName);
-                tvRestaurantName.setText("NGUYỄN LIỄU");
-                tvDescription.setText(foodDesc != null ? foodDesc : "");
-                tvCookingMethod.setText("Nước dùng tinh về hương vị, được nấu từ xương gà, xương bò, hành, gừng, quế, hồi...");
+                tvFoodName.setText(foodName);
+                tvIngredients.setText(foodDesc != null ? foodDesc : "Bánh phở tươi, thịt bò tái, nạm, gầu, hành lá, rau thơm, giá đỗ, nước dùng ninh xương bò 12 tiếng...");
+                tvDescription.setText("Phở Nam Định chuẩn vị với nước dùng trong veo, thơm lừng hành gừng và thịt bò tươi ngon. Được nấu theo công thức truyền thống của người Nam Định.");
+                tvHowToCook.setText("Xương bò rửa sạch, ninh lửa nhỏ 10-12 tiếng cùng hành, gừng, quế, hồi, đinh hương. Chế phẩm phở vào bát nóng, thêm thịt bò tái và nước dùng nóng.");
                 if (foodImageId > 0) {
-                    imgProduct.setImageResource(foodImageId);
+                    imgFoodCover.setImageResource(foodImageId);
                 }
             }
         } else {
             // Fallback to mock data
-            tvProductName.setText("Phở Bò Nam Định");
-            tvRestaurantName.setText("NGUYỄN LIỄU");
-            tvDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-            tvCookingMethod.setText("Nước dùng tinh về hương vị, được nấu từ xương gà, xương bò, hành, gừng, quế, hồi...");
+            tvFoodName.setText("Phở Bò Nam Định");
+            tvIngredients.setText("Bánh phở tươi, thịt bò tái, nạm, gầu, hành lá, rau thơm, giá đỗ, nước dùng ninh xương bò 12 tiếng...");
+            tvDescription.setText("Phở Nam Định chuẩn vị với nước dùng trong veo, thơm lừng hành gừng và thịt bò tươi ngon.");
+            tvHowToCook.setText("Xương bò rửa sạch, ninh lửa nhỏ 10-12 tiếng cùng hành, gừng, quế, hồi, đinh hương.");
         }
     }
 }
