@@ -2,10 +2,10 @@ package com.example.food_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +14,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText etName, etEmail, etPassword, etConfirmPassword;
     private Button btnRegister;
-    private ImageView btnBack;
-    private TextView tvBackToLogin;
+    private ImageView btnBack, btnTogglePassword, btnToggleConfirmPassword;
+    private boolean isPasswordVisible = false;
+    private boolean isConfirmPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,37 @@ public class RegisterActivity extends AppCompatActivity {
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);
         btnBack = findViewById(R.id.btnBack);
-        tvBackToLogin = findViewById(R.id.tvBackToLogin);
+        btnTogglePassword = findViewById(R.id.btnTogglePassword);
+        btnToggleConfirmPassword = findViewById(R.id.btnToggleConfirmPassword);
+
+        // Back Button
+        btnBack.setOnClickListener(v -> onBackPressed());
+
+        // Toggle Password Visibility
+        btnTogglePassword.setOnClickListener(v -> {
+            isPasswordVisible = !isPasswordVisible;
+            if (isPasswordVisible) {
+                etPassword.setTransformationMethod(null);
+                btnTogglePassword.setImageResource(android.R.drawable.ic_menu_view);
+            } else {
+                etPassword.setTransformationMethod(new PasswordTransformationMethod());
+                btnTogglePassword.setImageResource(android.R.drawable.ic_menu_view);
+            }
+            etPassword.setSelection(etPassword.getText().length());
+        });
+
+        // Toggle Confirm Password Visibility
+        btnToggleConfirmPassword.setOnClickListener(v -> {
+            isConfirmPasswordVisible = !isConfirmPasswordVisible;
+            if (isConfirmPasswordVisible) {
+                etConfirmPassword.setTransformationMethod(null);
+                btnToggleConfirmPassword.setImageResource(android.R.drawable.ic_menu_view);
+            } else {
+                etConfirmPassword.setTransformationMethod(new PasswordTransformationMethod());
+                btnToggleConfirmPassword.setImageResource(android.R.drawable.ic_menu_view);
+            }
+            etConfirmPassword.setSelection(etConfirmPassword.getText().length());
+        });
 
         // Register Button
         btnRegister.setOnClickListener(v -> {
@@ -53,19 +84,17 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
             } else {
                 // TODO: Call API to register
-                // For now, go to Login
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                finish();
+                registerUser(name, email, password);
             }
         });
+    }
 
-        // Back Button
-        btnBack.setOnClickListener(v -> onBackPressed());
-
-        // Back to Login Link
-        tvBackToLogin.setOnClickListener(v -> {
-            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-            finish();
-        });
+    private void registerUser(String name, String email, String password) {
+        // TODO: Implement API call to register user
+        Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+        
+        // Go back to login
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        finish();
     }
 }
