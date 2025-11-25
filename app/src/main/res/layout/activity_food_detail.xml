@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- PHẦN HEADER ẢNH BÌA + BO GÓC + 2 NÚT -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardHeader"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
+
+        <!-- Ảnh món ăn - sẽ load từ URL hoặc database -->
+        <ImageView
+            android:id="@+id/imgFoodCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@null"
+            tools:src="@drawable/pho_bo_nam_dinh" /> <!-- Chỉ hiện trong preview -->
+
+        <!-- Bo góc dưới trắng -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bottom_rounded_white" />
+
+        <!-- Nút Back -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="#FFFFFF"
+            android:contentDescription="@string/back" />
+
+        <!-- Nút Yêu thích (trái tim) -->
+        <ImageButton
+            android:id="@+id/btn_favorite"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end|top"
+            android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_tim"
+            app:tint="#FFFFFF"
+            android:contentDescription="@string/favorite" />
+
+        <!-- Icon yêu thích đã thích (khi isFavorite = true) - ẩn mặc định -->
+        <ImageButton
+            android:id="@+id/btn_favorite_filled"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end|top"
+            android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_tim_filled"
+            app:tint="#FF6B35"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@string/favorited" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- NỘI DUNG CUỘN -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:paddingTop="220dp"
+            android:paddingBottom="40dp">
+
+            <!-- Tên món ăn -->
+            <TextView
+                android:id="@+id/tvFoodName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
+                android:layout_marginBottom="32dp"
+                tools:text="Phở Bò Nam Định" />
+
+            <!-- ==================== NGUYÊN LIỆU ==================== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients"
+                style="@style/SectionTitle" />
+
+            <View style="@style/OrangeUnderline" />
+
+            <TextView
+                android:id="@+id/tvIngredients"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/SectionContent"
+                tools:text="Bánh phở tươi, thịt bò tái, nạm, gầu, hành lá, rau thơm, giá đỗ, nước dùng ninh xương bò 12 tiếng..." />
+
+            <!-- ==================== MÔ TẢ MÓN ĂN ==================== -->
+            <TextView
+                android:layout_marginTop="36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                style="@style/SectionTitle" />
+
+            <View style="@style/OrangeUnderline" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/SectionContent"
+                tools:text="Phở Nam Định chuẩn vị với nước dùng trong veo, thơm lừng..." />
+
+            <!-- ==================== CÁCH CHẾ BIẾN ==================== -->
+            <TextView
+                android:layout_marginTop="36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/how_to_cook"
+                style="@style/SectionTitle" />
+
+            <View style="@style/OrangeUnderline" />
+
+            <TextView
+                android:id="@+id/tvHowToCook"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/SectionContent"
+                tools:text="Xương bò rửa sạch, ninh lửa nhỏ 10-12 tiếng..." />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,4 +5,10 @@
     <string name="title_notifications">Notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ingredients">NGUYÊN LIỆU</string>
+    <string name="description">MÔ TẢ MÓN ĂN</string>
+    <string name="how_to_cook">CÁCH CHẾ BIẾN</string>
+    <string name="back">Quay lại</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="favorited">Đã yêu thích</string>
 </resources>

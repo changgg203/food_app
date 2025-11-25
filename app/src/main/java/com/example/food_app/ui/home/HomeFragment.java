@@ -1,5 +1,6 @@
 package com.example.food_app.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.food_app.FoodDetailActivity;
 import com.example.food_app.adapter.FoodAdapter;
 import com.example.food_app.databinding.FragmentHomeBinding;
+import com.example.food_app.model.Food;
 
 public class HomeFragment extends Fragment {
 
@@ -33,6 +36,17 @@ public class HomeFragment extends Fragment {
         rvFoods.setLayoutManager(new LinearLayoutManager(getContext()));
         foodAdapter = new FoodAdapter(null);
         rvFoods.setAdapter(foodAdapter);
+
+        // Set click listener for food items
+        foodAdapter.setOnFoodClickListener(food -> {
+            Intent intent = new Intent(getContext(), FoodDetailActivity.class);
+            intent.putExtra("foodName", food.getName());
+            intent.putExtra("foodDesc", food.getDescription());
+            intent.putExtra("foodRating", food.getRating());
+            intent.putExtra("foodTime", food.getTime());
+            intent.putExtra("foodImageId", food.getImageResId());
+            startActivity(intent);
+        });
 
         // Observe food list from ViewModel
         homeViewModel.getFoodList().observe(getViewLifecycleOwner(), foods -> {
