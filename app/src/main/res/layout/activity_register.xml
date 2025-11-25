@@ -170,6 +170,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="12dp" />
+            </RelativeLayout>
+
+            <!-- BUTTON REGISTER -->
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
