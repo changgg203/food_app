@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
-    private Button btnLogin, btnRegister;
-    private TextView tvForgotPassword;
+    private Button btnLogin;
+    private TextView tvForgotPassword, tvRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
+        tvRegister = findViewById(R.id.tvRegister);
 
         // Login Button
         btnLogin.setOnClickListener(v -> {
@@ -49,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Register Button
-        btnRegister.setOnClickListener(v -> {
+        // Register Link
+        tvRegister.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
 
