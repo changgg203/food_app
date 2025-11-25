@@ -7,7 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class VerifyOtpActivity extends AppCompatActivity {
 
-    private EditText etOtp1, etOtp2, etOtp3, etOtp4, etOtp5;
+    private EditText etOtp1, etOtp2, etOtp3, etOtp4;
     private Button btnVerify;
-    private ImageView btnBack;
-    private TextView tvResendOtp, tvTimer, tvChangeEmail, tvEmailDisplay;
+    private ImageButton btnBack;
+    private TextView tvResend;
     private CountDownTimer countDownTimer;
     private boolean isTimerRunning = false;
 
@@ -27,29 +27,19 @@ public class VerifyOtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_otp);
 
-        // Initialize views
-        etOtp1 = findViewById(R.id.etOtp1);
-        etOtp2 = findViewById(R.id.etOtp2);
-        etOtp3 = findViewById(R.id.etOtp3);
-        etOtp4 = findViewById(R.id.etOtp4);
-        etOtp5 = findViewById(R.id.etOtp5);
-        btnVerify = findViewById(R.id.btnVerify);
-        btnBack = findViewById(R.id.btnBack);
-        tvResendOtp = findViewById(R.id.tvResendOtp);
-        tvTimer = findViewById(R.id.tvTimer);
-        tvChangeEmail = findViewById(R.id.tvChangeEmail);
-        tvEmailDisplay = findViewById(R.id.tvEmailDisplay);
-
         // Hide ActionBar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        // Get email from intent
-        String email = getIntent().getStringExtra("email");
-        if (email != null) {
-            tvEmailDisplay.setText(email);
-        }
+        // Initialize views
+        etOtp1 = findViewById(R.id.otp1);
+        etOtp2 = findViewById(R.id.otp2);
+        etOtp3 = findViewById(R.id.otp3);
+        etOtp4 = findViewById(R.id.otp4);
+        btnVerify = findViewById(R.id.btn_verify);
+        btnBack = findViewById(R.id.btnBack);
+        tvResend = findViewById(R.id.tv_resend);
 
         // Setup OTP input fields with auto-focus
         setupOtpInputs();
@@ -62,10 +52,9 @@ public class VerifyOtpActivity extends AppCompatActivity {
             String otp = etOtp1.getText().toString() +
                     etOtp2.getText().toString() +
                     etOtp3.getText().toString() +
-                    etOtp4.getText().toString() +
-                    etOtp5.getText().toString();
+                    etOtp4.getText().toString();
 
-            if (otp.length() < 5) {
+            if (otp.length() < 4) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ mã xác minh", Toast.LENGTH_SHORT).show();
             } else {
                 verifyOtp(otp);
@@ -73,7 +62,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
         });
 
         // Resend OTP
-        tvResendOtp.setOnClickListener(v -> {
+        tvResend.setOnClickListener(v -> {
             if (!isTimerRunning) {
                 resendOtp();
                 startTimer();
@@ -82,39 +71,32 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
         // Back Button
         btnBack.setOnClickListener(v -> onBackPressed());
-
-        // Change Email
-        tvChangeEmail.setOnClickListener(v -> {
-            startActivity(new Intent(VerifyOtpActivity.this, ForgotPasswordActivity.class));
-            finish();
-        });
     }
 
     private void setupOtpInputs() {
         etOtp1.addTextChangedListener(new OtpTextWatcher(etOtp1, etOtp2));
         etOtp2.addTextChangedListener(new OtpTextWatcher(etOtp2, etOtp3));
         etOtp3.addTextChangedListener(new OtpTextWatcher(etOtp3, etOtp4));
-        etOtp4.addTextChangedListener(new OtpTextWatcher(etOtp4, etOtp5));
-        etOtp5.addTextChangedListener(new OtpTextWatcher(etOtp5, null));
+        etOtp4.addTextChangedListener(new OtpTextWatcher(etOtp4, null));
     }
 
     private void startTimer() {
         isTimerRunning = true;
-        tvResendOtp.setEnabled(false);
-        tvResendOtp.setAlpha(0.5f);
+        tvResend.setEnabled(false);
+        tvResend.setAlpha(0.5f);
 
-        countDownTimer = new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(50000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                tvTimer.setText(" (" + (millisUntilFinished / 1000) + "s)");
+                tvResend.setText("Resend in " + (millisUntilFinished / 1000) + "s");
             }
 
             @Override
             public void onFinish() {
                 isTimerRunning = false;
-                tvResendOtp.setEnabled(true);
-                tvResendOtp.setAlpha(1f);
-                tvTimer.setText(" (Hết hạn)");
+                tvResend.setEnabled(true);
+                tvResend.setAlpha(1f);
+                tvResend.setText("Resend");
             }
         }.start();
     }
@@ -128,7 +110,6 @@ public class VerifyOtpActivity extends AppCompatActivity {
         etOtp2.setText("");
         etOtp3.setText("");
         etOtp4.setText("");
-        etOtp5.setText("");
         etOtp1.requestFocus();
     }
 
