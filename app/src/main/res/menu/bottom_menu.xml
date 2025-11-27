@@ -4,20 +4,20 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_grid"
-        android:title="" />
+        android:title="Trang Chủ" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_all_foods"
         android:icon="@drawable/ic_menu"
-        android:title="" />
+        android:title="Ẩm thực Việt Nam" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_favourite_food"
         android:icon="@drawable/ic_note"
-        android:title="" />
+        android:title="Món tủ của tôi" />
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_user_profile"
-        android:title="" />
+        android:title="Trang cá nhân" />
 
 </menu>
