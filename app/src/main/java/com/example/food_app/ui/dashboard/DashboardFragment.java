@@ -17,7 +17,7 @@ public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
     private DashboardViewModel dashboardViewModel;
-    private OrderAdapter orderAdapter;
+    private com.example.food_app.adapter.FoodAdapter foodAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -27,15 +27,15 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Setup RecyclerView
-        binding.rvOrders.setLayoutManager(new LinearLayoutManager(getContext()));
-        orderAdapter = new OrderAdapter(null);
-        binding.rvOrders.setAdapter(orderAdapter);
+        // Thiết lập RecyclerView cho danh sách món ăn
+        binding.rvFood.setLayoutManager(new LinearLayoutManager(getContext()));
+        foodAdapter = new com.example.food_app.adapter.FoodAdapter(null);
+        binding.rvFood.setAdapter(foodAdapter);
 
-        // Observe order list from ViewModel
-        dashboardViewModel.getOrderList().observe(getViewLifecycleOwner(), orders -> {
-            if (orders != null) {
-                orderAdapter.updateOrderList(orders);
+        // Quan sát danh sách món ăn từ ViewModel
+        dashboardViewModel.getFoodList().observe(getViewLifecycleOwner(), foods -> {
+            if (foods != null) {
+                foodAdapter.updateFoodList(foods);
             }
         });
 

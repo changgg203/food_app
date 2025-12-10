@@ -3,38 +3,37 @@ package com.example.food_app.ui.dashboard;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.example.food_app.model.Order;
+import com.example.food_app.model.Food;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
-    private final MutableLiveData<List<Order>> orderList;
+    private final MutableLiveData<List<Food>> foodList;
 
     public DashboardViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is dashboard fragment");
         
-        orderList = new MutableLiveData<>();
-        loadOrderData();
+        foodList = new MutableLiveData<>();
+        loadFoodData();
     }
 
-    private void loadOrderData() {
-        List<Order> orders = new ArrayList<>();
-        orders.add(new Order("Đơn #12345", "Rose Garden Restaurant", "2x Burger, 1x Fries", "150.000đ", "Đang giao"));
-        orders.add(new Order("Đơn #12346", "Phở Bò Hà Nội", "1x Phở Bò, 2x Trà đá", "120.000đ", "Đang chuẩn bị"));
-        orders.add(new Order("Đơn #12347", "Bánh Mì Huế", "3x Bánh mì thịt", "180.000đ", "Đã giao"));
-        orders.add(new Order("Đơn #12348", "Cơm Tấm Sài Gòn", "1x Cơm tấm, 1x Trứng", "95.000đ", "Đang giao"));
-        
-        orderList.setValue(orders);
+    private void loadFoodData() {
+        List<Food> foods = new ArrayList<>();
+        foods.add(new Food("Burger Bò Phô Mai", "Bánh burger bò với phô mai tan chảy", 4.5f, "20 phút", android.R.drawable.ic_menu_camera));
+        foods.add(new Food("Phở Bò Hà Nội", "Phở bò truyền thống Hà Nội", 4.8f, "15 phút", android.R.drawable.ic_menu_gallery));
+        foods.add(new Food("Bánh Mì Thịt", "Bánh mì thịt đặc biệt", 4.2f, "10 phút", android.R.drawable.ic_menu_manage));
+        foods.add(new Food("Cơm Tấm Sườn Trứng", "Cơm tấm sườn trứng thơm ngon", 4.7f, "18 phút", android.R.drawable.ic_menu_slideshow));
+        foodList.setValue(foods);
     }
 
     public LiveData<String> getText() {
         return mText;
     }
 
-    public LiveData<List<Order>> getOrderList() {
-        return orderList;
+    public LiveData<List<Food>> getFoodList() {
+        return foodList;
     }
 }

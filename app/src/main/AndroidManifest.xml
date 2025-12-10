@@ -13,18 +13,34 @@
         android:theme="@style/Theme.Food_App"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".OnboardingActivity"
             android:exported="true"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true"
-            android:label="Đăng nhập">
+            android:label="Onboarding">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity_onboarding_02"
+            android:exported="true"
+            android:label="Onboarding 2" />
+        <activity
+            android:name=".Activity_onboarding_03"
+            android:exported="true"
+            android:label="Onboarding 3" />
+        <activity
+            android:name=".IntroActivity"
+            android:exported="true"
+            android:label="Giới thiệu" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:label="Đăng nhập" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
         <activity
             android:name=".RegisterActivity"
             android:exported="true"

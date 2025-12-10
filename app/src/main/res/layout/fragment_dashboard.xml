@@ -9,21 +9,21 @@
     android:padding="16dp"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <!-- Header -->
+    <!-- Tiêu đề -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đơn hàng của tôi"
+        android:text="Danh sách tất cả các món ăn"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginBottom="16dp" />
 
-    <!-- Orders List -->
+    <!-- Danh sách món ăn -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOrders"
+        android:id="@+id/rvFood"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_order" />
+        tools:listitem="@layout/item_food" />
 
 </LinearLayout>
