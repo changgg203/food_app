@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_profile)
+                R.id.navigation_home, R.id.navigation_all_foods, R.id.navigation_favourite_food, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
     private boolean isOnboardingComplete() {
-        return getSharedPreferences("user_prefs", MODE_PRIVATE).getBoolean("onboarding_complete", false);
+        return getSharedPreferences("app_prefs", MODE_PRIVATE).getBoolean("onboarding_complete", false);
     }
 
     private boolean isUserLoggedIn() {

@@ -22,14 +22,12 @@ public class IntroActivity extends AppCompatActivity {
             if (btnLogin != null) {
                 btnLogin.setOnClickListener(v -> {
                     Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 });
             }
             if (btnRegister != null) {
                 btnRegister.setOnClickListener(v -> {
                     Intent intent = new Intent(IntroActivity.this, RegisterActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 });
             }

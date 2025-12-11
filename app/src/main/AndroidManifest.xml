@@ -13,22 +13,18 @@
         android:theme="@style/Theme.Food_App"
         tools:targetApi="31">
         <activity
-            android:name=".OnboardingActivity"
+            android:name=".LauncherActivity"
             android:exported="true"
-            android:label="Onboarding">
+            android:theme="@style/Theme.Food_App">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity_onboarding_02"
-            android:exported="true"
-            android:label="Onboarding 2" />
-        <activity
-            android:name=".Activity_onboarding_03"
-            android:exported="true"
-            android:label="Onboarding 3" />
+            android:name=".OnboardingActivity"
+            android:exported="false"
+            android:label="Onboarding" />
         <activity
             android:name=".IntroActivity"
             android:exported="true"

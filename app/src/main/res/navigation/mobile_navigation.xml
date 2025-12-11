@@ -13,14 +13,15 @@
 
     <fragment
         android:id="@+id/navigation_all_foods"
-        android:name="com.example.food_app.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.example.food_app.ui.allfoods.AllFoodsFragment"
+        android:label="Ẩm thực Việt Nam"
         tools:layout="@layout/fragment_all_food" />
 
     <fragment
         android:id="@+id/navigation_favourite_food"
-        android:name="com.example.food_app.ui.notifications.NotificationsFragment"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.example.food_app.ui.favourite.FavouriteFoodFragment"
+        android:label="Món tủ của tôi"
+        tools:layout="@layout/fragment_favourite_food" />
 
         <fragment
         android:id="@+id/navigation_profile"
